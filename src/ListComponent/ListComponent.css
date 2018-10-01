@@ -1,0 +1,14 @@
+.list-section {
+  overflow: hidden;
+}
+
+.list {
+  display: flex;
+  padding: 0;
+  list-style: none;
+}
+
+.list-entry {
+  flex: 1;
+  padding: 1rem;
+}
