@@ -4,8 +4,10 @@
 
 .list {
   display: flex;
+  margin: -1rem;
   padding: 0;
   list-style: none;
+  flex-wrap: wrap;
 }
 
 .list-entry {
