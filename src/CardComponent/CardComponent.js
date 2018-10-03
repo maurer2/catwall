@@ -3,11 +3,12 @@ import './CardComponent.css';
 
 class CardComponent extends Component {
   render() {
+    const { title } = this.props;
     return (
       <article className="article">
         <header>
           <h3>
-            Title
+           { title }
           </h3>
         </header>
         <section>

@@ -7,11 +7,11 @@ import FooterComponent from '../FooterComponent/FooterComponent';
 class App extends Component {
   render() {
     return (
-      <article className="app">
+      <div className="app">
         <HeaderComponent />
         <ContentComponent />
         <FooterComponent />
-      </article>
+      </div>
     );
   }
 }

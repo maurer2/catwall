@@ -14,3 +14,9 @@
   flex: 1;
   padding: 1rem;
 }
+
+.list-breaker {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 100%;
+}
