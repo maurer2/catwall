@@ -11,8 +11,8 @@ class ListComponent extends Component {
       const isLastInLine = !(index % numItemsPerLine);
       const breakElement = <li className="list-breaker"></li>;
       const element = (
-        <li className="list-entry" key={ entry.toLowerCase().replace(/ /g, '') } data-index={ index }>
-          <CardComponent title={ entry }></CardComponent>
+        <li className="list-entry" key={ entry.toLowerCase().replace(/ /g, '') }>
+          <CardComponent title={ entry } id={ index }></CardComponent>
         </li>
       );
 

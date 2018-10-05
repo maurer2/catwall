@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "add": "^2.0.6",
+    "axios": "^0.18.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^3.1.0",
     "eslint-plugin-import": "^2.14.0",
@@ -16,7 +18,8 @@
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-scripts": "2.0.3",
-    "webpack-analyzer": "^0.2.0"
+    "webpack-analyzer": "^0.2.0",
+    "yarn": "^1.10.1"
   },
   "scripts": {
     "start": "react-scripts start",
