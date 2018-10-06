@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+
 import './CardComponent.css';
+
+import placeholder from './placeholder.jpeg';
+import spinner from './spinner.svg';
 
 class CardComponent extends Component {
   constructor(props) {
@@ -8,6 +12,7 @@ class CardComponent extends Component {
 
     this.state = {
       imageURL: '',
+      showSpinner: true,
     };
   }
 
@@ -23,37 +28,46 @@ class CardComponent extends Component {
         const image = response.data.find((entry) => entry.id === id);
 
         if (image === undefined) {
+           this.setState({ showSpinner: false, });
            return
         }
 
         const { url } = image;
 
-        this.setState({ imageURL: url });
+        this.setState({
+          imageURL: url,
+          showSpinner: false,
+        });
     })
   }
 
   render() {
     const { title } = this.props;
-    const { imageURL } = this.state;
+    const { imageURL, showSpinner } = this.state;
 
     return (
       <article className="article">
+        { showSpinner === true ?
+            <div className="overlay">
+              <img src={ spinner } className="spinner" alt="spinner" />
+            </div>
+            : ''
+        }
         <header>
           { imageURL !== '' ?
-              <img src={ imageURL } className="image" alt=" " />
+              <img src={ imageURL } className="image" alt="" />
               :
-              <span className="placeholder"> </span>
+              <img src={ placeholder } className="image image--placeholder" alt="" />
           }
-          <h3>
+          <h3 className="title">
             { title }
           </h3>
         </header>
-        <section>
-          Content
+        <section className="text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+          ex ea commodo consequat.
         </section>
-        <footer>
-          Footer
-        </footer>
       </article>
     )
   }

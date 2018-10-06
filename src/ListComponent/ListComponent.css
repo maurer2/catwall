@@ -15,6 +15,12 @@
   padding: 1rem;
 }
 
+.list-entry--one-third {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(100% / 3);
+}
+
 .list-breaker {
   flex-grow: 0;
   flex-shrink: 0;
