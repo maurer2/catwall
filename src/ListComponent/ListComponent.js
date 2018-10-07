@@ -47,7 +47,7 @@ class ListComponent extends Component {
   }
 
   render() {
-    const { entries, isFetching } = this.state;
+    const { entries, isFetching, limit } = this.state;
 
     const cards = entries.map((entry) =>
       <li className="list-entry list-entry--one-third" key={ entry.id }>
@@ -62,7 +62,7 @@ class ListComponent extends Component {
         </ul>
         { entries.length > 0 &&
           <button className="button button--more" onClick={ this.moreButtonClicked } disabled={ isFetching }>
-            Load more entries
+            Load { limit } more entries
           </button>
         }
       </section>

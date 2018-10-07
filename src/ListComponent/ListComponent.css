@@ -38,4 +38,8 @@
   width: 100%;
   margin-top: 1rem;
   padding: 0.5rem;
+  background: var(--color2);
+  color: #fff;
+  outline-offset: -3px;
+  outline-color: var(--color2);
 }
