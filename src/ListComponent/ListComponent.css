@@ -32,3 +32,10 @@
   flex-shrink: 0;
   flex-basis: 100%;
 }
+
+.button--more {
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.5rem;
+}
