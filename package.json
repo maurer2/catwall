@@ -18,6 +18,7 @@
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-scripts": "2.0.3",
+    "react-transition-group": "^2.5.0",
     "webpack-analyzer": "^0.2.0",
     "yarn": "^1.10.1"
   },

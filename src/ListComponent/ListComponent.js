@@ -1,29 +1,41 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import CardComponent from '../CardComponent/CardComponent';
+
 import './ListComponent.css';
 
 class ListComponent extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      entries: [],
+    };
+  }
+
+  componentDidMount() {
+    // populate with dummy data
+    axios.get('http://jsonplaceholder.typicode.com/photos?_start=1&_limit=10')
+      .then(response => {
+        this.setState({
+          entries: (Array.isArray(response.data)) ? response.data : [response.data],
+        });
+    })
+  }
+
   render() {
-    const items = ['Test 1', 'Test 2', 'Test 3', 'Test 4', 'Test 5', 'Test 6'];
-    // const numItemsPerLine = 3;
+    const { entries } = this.state;
 
-    const entries = items.map((entry, index) => {
-      // const isLastInLine = !(index % numItemsPerLine);
-      // const breakElement = <li className="list-breaker"></li>;
-      const element = (
-        <li className="list-entry list-entry--one-third" key={ entry.toLowerCase().replace(/ /g, '') }>
-          <CardComponent title={ entry } id={ index }></CardComponent>
-        </li>
-      );
-
-      // return (isLastInLine) ? [breakElement, element] : element;
-      return element;
-    });
+    const cards = entries.map((entry) =>
+      <li className="list-entry list-entry--one-third">
+        <CardComponent title={ entry.title } id={ entry.id }></CardComponent>
+      </li>
+    );
 
     return (
       <section className="list-section">
         <ul className="list">
-          { entries }
+          { cards }
         </ul>
       </section>
     )
