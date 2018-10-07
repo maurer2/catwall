@@ -27,8 +27,8 @@ class ListComponent extends Component {
     const { entries } = this.state;
 
     const cards = entries.map((entry) =>
-      <li className="list-entry list-entry--one-third">
-        <CardComponent title={ entry.title } id={ entry.id }></CardComponent>
+      <li className="list-entry list-entry--one-third" key={ entry.id }>
+        <CardComponent title={ entry.title } image={ entry.url }></CardComponent>
       </li>
     );
 
@@ -37,6 +37,9 @@ class ListComponent extends Component {
         <ul className="list">
           { cards }
         </ul>
+        <button className="button" disabled>
+          Load More
+        </button>
       </section>
     )
   }

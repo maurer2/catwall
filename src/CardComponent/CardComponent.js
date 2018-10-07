@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
 import './CardComponent.css';
 
@@ -11,39 +10,21 @@ class CardComponent extends Component {
     super(props);
 
     this.state = {
-      imageURL: '',
       showSpinner: true,
     };
   }
 
   componentDidMount() {
-    this.getImageViaAjax()
+    // this.setState({ showSpinner: false, });
   }
 
-  getImageViaAjax() {
-    const { id } = this.props;
-
-    axios.get('https://jsonplaceholder.typicode.com/photos/')
-      .then(response => {
-        const image = response.data.find((entry) => entry.id === id);
-
-        if (image === undefined) {
-           this.setState({ showSpinner: false, });
-           return
-        }
-
-        const { url } = image;
-
-        this.setState({
-          imageURL: url,
-          showSpinner: false,
-        });
-    })
+  handleImageLoaded() {
+    this.setState({ showSpinner: false });
   }
 
   render() {
-    const { title } = this.props;
-    const { imageURL, showSpinner } = this.state;
+    const { title, image } = this.props;
+    const { showSpinner } = this.state;
 
     return (
       <article className="article">
@@ -54,10 +35,10 @@ class CardComponent extends Component {
             : ''
         }
         <header>
-          { imageURL !== '' ?
-              <img src={ imageURL } className="image" alt="" />
+          { image !== '' ?
+              <img src={ image } className="image" alt="" onLoad={this.handleImageLoaded.bind(this)} />
               :
-              <img src={ placeholder } className="image image--placeholder" alt="" />
+              <img src={ placeholder } className="image image--placeholder" alt="" onLoad={this.handleImageLoaded.bind(this)} />
           }
           <h3 className="title">
             { title }
