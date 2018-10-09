@@ -15,7 +15,7 @@ class CardComponent extends Component {
   }
 
   componentDidMount() {
-    // this.setState({ showSpinner: false, });
+    this.setState({ showSpinner: false, });
   }
 
   handleImageLoaded() {
@@ -23,7 +23,7 @@ class CardComponent extends Component {
   }
 
   render() {
-    const { title, image } = this.props;
+    const { title, image, index } = this.props;
     const { showSpinner } = this.state;
 
     return (
@@ -41,14 +41,9 @@ class CardComponent extends Component {
               <img src={ placeholder } className="image image--placeholder" alt="" onLoad={this.handleImageLoaded.bind(this)} />
           }
           <h3 className="title">
-            { title }
+              { index }: { title }
           </h3>
         </header>
-        <section className="text">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-          ex ea commodo consequat.
-        </section>
       </article>
     )
   }

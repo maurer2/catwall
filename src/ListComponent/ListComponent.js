@@ -24,41 +24,58 @@ class ListComponent extends Component {
   }
 
   fetchData() {
-    const { REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET } = process.env;
-    // let url = "https://api.imgur.com/3/gallery/search/top/?q_all=derpy+cats&q_type=jpg";
-    // https://api.imgur.com/3/gallery/search/top/all/0/?q_all=derpy+cats&q_type=jpg
-    const url = 'imgur.json';
+    const { REACT_APP_CLIENT_ID } = process.env;
+    let url = 'https://api.imgur.com/3/gallery/search/top/all/0/?q_all=derpy+cats&q_type=jpg&q_size_px=small';
+    let request;
 
-    if (REACT_APP_CLIENT_ID === undefined || REACT_APP_CLIENT_SECRET === undefined) {
-      return
+    if (REACT_APP_CLIENT_ID === undefined) {
+      url = 'imgur.json';
+      request = axios.get(url);
+    } else {
+      url = 'imgur.json';
+      request = axios.get(url,{ headers: { Authorization: `Client-ID ${REACT_APP_CLIENT_ID}`, 'Content-Type': 'application/json'}})
     }
 
     // this.setState({ isFetching: true });
-    axios.get(url,{ headers: { Authorization: `Client-ID ${REACT_APP_CLIENT_ID}`, crossdomain: true }})
+    request
       .then((response) => {
         console.log(response.data.data);
         const fetchedEntries = (Array.isArray(response.data.data)) ? response.data.data : [response.data.data];
+        const mappedAndFilteredEntries = fetchedEntries.reduce((total, entry) => {
+          const isAlbum = entry.is_album;
+
+          if (!isAlbum) {
+            const mappedEntry = {
+              id: entry.id,
+              title: entry.title,
+              link: entry.link,
+            }
+            total.push(mappedEntry) // technically this should be a concat
+          } else {
+
+            const mappedEntries = entry.images.map((mappedEntry, index) => {
+              return {
+                id: mappedEntry.id,
+                title: `${entry.title} ${index + 1}`,
+                link: mappedEntry.link,
+              }
+
+
+            })
+            total = total.concat(mappedEntries);
+          }
+
+          return total;
+        }, []);
+
+        console.log(mappedAndFilteredEntries);
 
         // filter out albums
         // const fetchedSingleEntries = fetchedEntries.filter((entry) => entry['images_count'] === 1);
 
         this.setState(oldState => ({
-          entries: oldState.entries.concat(fetchedEntries),
-          isFetching: false,
-        }));
-      })
-  }
-
-  fetchDataDummy() {
-    const { startingPoint, limit } = this.state;
-
-    this.setState({ isFetching: true });
-    axios.get(`http://jsonplaceholder.typicode.com/photos?_start=${startingPoint}&_limit=${limit}`)
-      .then((response) => {
-        const fetchedEntries = (Array.isArray(response.data)) ? response.data : [response.data];
-
-        this.setState(oldState => ({
-          entries: oldState.entries.concat(fetchedEntries),
+          //entries: oldState.entries.concat(fetchedEntries),
+          entries: mappedAndFilteredEntries,
           isFetching: false,
         }));
       })
@@ -75,9 +92,9 @@ class ListComponent extends Component {
   render() {
     const { entries, isFetching, limit } = this.state;
 
-    const cards = entries.map((entry) =>
+    const cards = entries.map((entry, index) =>
       <li className="list-entry list-entry--one-third" key={ entry.id }>
-        <CardComponent title={ entry.title } image={ entry.link }></CardComponent>
+        <CardComponent title={ entry.title } image={ entry.link } index={ index + 1 }></CardComponent>
       </li>
     );
 

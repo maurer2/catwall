@@ -27,10 +27,7 @@
 
 .title {
   margin: 1rem;
+  font-weight: normal;
 }
 
 .subtitle {}
-
-.text {
-  margin: 1rem;
-}
