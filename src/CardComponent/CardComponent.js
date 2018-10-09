@@ -15,7 +15,7 @@ class CardComponent extends Component {
   }
 
   componentDidMount() {
-    this.setState({ showSpinner: false, });
+    // this.setState({ showSpinner: false, });
   }
 
   handleImageLoaded() {

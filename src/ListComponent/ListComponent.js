@@ -36,45 +36,35 @@ class ListComponent extends Component {
       request = axios.get(url,{ headers: { Authorization: `Client-ID ${REACT_APP_CLIENT_ID}`, 'Content-Type': 'application/json'}})
     }
 
-    // this.setState({ isFetching: true });
+    this.setState({ isFetching: true });
     request
       .then((response) => {
-        console.log(response.data.data);
         const fetchedEntries = (Array.isArray(response.data.data)) ? response.data.data : [response.data.data];
         const mappedAndFilteredEntries = fetchedEntries.reduce((total, entry) => {
-          const isAlbum = entry.is_album;
+          let newTotal = total;
 
-          if (!isAlbum) {
-            const mappedEntry = {
+          if (!entry.is_album) {
+            newTotal = newTotal.concat({
               id: entry.id,
               title: entry.title,
               link: entry.link,
-            }
-            total.push(mappedEntry) // technically this should be a concat
+            });
           } else {
-
             const mappedEntries = entry.images.map((mappedEntry, index) => {
               return {
                 id: mappedEntry.id,
                 title: `${entry.title} ${index + 1}`,
                 link: mappedEntry.link,
               }
-
-
             })
-            total = total.concat(mappedEntries);
+            newTotal = newTotal.concat(mappedEntries);
           }
 
-          return total;
+          return newTotal;
         }, []);
 
-        console.log(mappedAndFilteredEntries);
-
-        // filter out albums
-        // const fetchedSingleEntries = fetchedEntries.filter((entry) => entry['images_count'] === 1);
-
         this.setState(oldState => ({
-          //entries: oldState.entries.concat(fetchedEntries),
+          // entries: oldState.entries.concat(fetchedEntries),
           entries: mappedAndFilteredEntries,
           isFetching: false,
         }));
