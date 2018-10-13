@@ -12,7 +12,7 @@ class ListComponent extends Component {
     this.state = {
       entries: [],
       isFetching: false,
-      startingPoint: 0,
+      // startingPoint: 0,
       limit: 3,
     };
 
@@ -51,13 +51,12 @@ class ListComponent extends Component {
               link: entry.link,
             });
           } else {
-            const mappedEntries = entry.images.map((mappedEntry, index) => {
-              return {
+            const mappedEntries = entry.images.map((mappedEntry, index) => ({
                 id: mappedEntry.id,
                 title: `${entry.title} ${index + 1}`,
                 link: mappedEntry.link,
-              }
-            })
+              })
+            );
 
             newTotal = newTotal.concat(mappedEntries);
           }
@@ -65,7 +64,8 @@ class ListComponent extends Component {
           return newTotal;
         }, []);
 
-        this.setState(oldState => ({
+        // this.setState(oldState => ({
+        this.setState(({
           // entries: oldState.entries.concat(fetchedEntries),
           entries: mappedAndFilteredEntries,
           isFetching: false,

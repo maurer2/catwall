@@ -4,6 +4,7 @@ import HeaderComponent from '../HeaderComponent/HeaderComponent';
 import ContentComponent from '../ContentComponent/ContentComponent';
 import FooterComponent from '../FooterComponent/FooterComponent';
 
+// eslint-disable-next-line react/prefer-stateless-function
 class App extends Component {
   render() {
     return (
