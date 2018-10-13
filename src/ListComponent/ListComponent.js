@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import CardComponent from '../CardComponent/CardComponent';
+import styles from './styles.css';
 
 import './ListComponent.css';
 
@@ -57,6 +58,7 @@ class ListComponent extends Component {
                 link: mappedEntry.link,
               }
             })
+
             newTotal = newTotal.concat(mappedEntries);
           }
 
@@ -84,7 +86,7 @@ class ListComponent extends Component {
 
     const cards = entries.map((entry, index) =>
       <li className="list-entry list-entry--one-third" key={ entry.id }>
-        <CardComponent title={ entry.title } image={ entry.link } index={ index + 1 }></CardComponent>
+        <CardComponent title={ entry.title } image={ entry.link } index={ index + 1 } style={ styles.column }/>
       </li>
     );
 
@@ -94,7 +96,7 @@ class ListComponent extends Component {
           { cards }
         </ul>
         { entries.length > 0 &&
-          <button className="button button--more" onClick={ this.moreButtonClicked } disabled={ isFetching }>
+          <button className="button button--more" type="button" onClick={ this.moreButtonClicked } disabled={ isFetching }>
             Load { limit } more entries
           </button>
         }
