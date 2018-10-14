@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 
-import './CardComponent.css';
-
 import placeholder from './placeholder.jpeg';
 import spinner from './spinner.svg';
+
+import styles from './CardComponent.css';
+
 
 class CardComponent extends Component {
   constructor(props) {
@@ -27,20 +28,20 @@ class CardComponent extends Component {
     const { showSpinner } = this.state;
 
     return (
-      <article className="article">
+      <article className={ styles.article }>
         { showSpinner === true ?
-            <div className="overlay">
-              <img src={ spinner } className="spinner" alt="spinner" />
+            <div className={ styles.overlay }>
+              <img src={ spinner } className={ styles.spinner } alt="spinner" />
             </div>
             : ''
         }
         <header>
           { image !== '' ?
-              <img src={ image } className="image" alt="" onLoad={this.handleImageLoaded.bind(this)} />
+              <img src={ image } className={ styles.image } alt="" onLoad={this.handleImageLoaded.bind(this)} />
               :
-              <img src={ placeholder } className="image image--placeholder" alt="" onLoad={this.handleImageLoaded.bind(this)} />
+              <img src={ placeholder } className={ styles.article } alt="" onLoad={this.handleImageLoaded.bind(this)} />
           }
-          <h3 className="title">
+          <h3 className={ styles.title }>
               { index }: { title }
           </h3>
         </header>

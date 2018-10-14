@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import './HeaderComponent.css';
+
+import styles from './HeaderComponent.css';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class HeaderComponent extends Component {
   render() {
-    return <header className="header">Header</header>;
+    return <header className={ styles.header }>Header</header>;
   }
 }
 

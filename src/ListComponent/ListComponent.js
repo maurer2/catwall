@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import CardComponent from '../CardComponent/CardComponent';
-import styles from './styles.css';
 
-import './ListComponent.css';
+import styles from './ListComponent.css';
 
 class ListComponent extends Component {
   constructor(props) {
@@ -85,18 +84,19 @@ class ListComponent extends Component {
     const { entries, isFetching, limit } = this.state;
 
     const cards = entries.map((entry, index) =>
-      <li className="list-entry list-entry--one-third" key={ entry.id }>
-        <CardComponent title={ entry.title } image={ entry.link } index={ index + 1 } style={ styles.column }/>
+      <li className={ [styles.listEntry, styles.listEntryOneThird].join(' ') } key={ entry.id }>
+        <CardComponent title={ entry.title } image={ entry.link } index={ index + 1 }/>
       </li>
     );
 
     return (
-      <section className="list-section">
-        <ul className="list">
+      <section className={ styles.section }>
+        <ul className={ styles.list }>
           { cards }
         </ul>
         { entries.length > 0 &&
-          <button className="button button--more" type="button" onClick={ this.moreButtonClicked } disabled={ isFetching }>
+          <button className={ [styles.button, styles.buttonMore].join(' ') } type="button" disabled={ isFetching }
+                  onClick={ this.moreButtonClicked }>
             Load { limit } more entries
           </button>
         }

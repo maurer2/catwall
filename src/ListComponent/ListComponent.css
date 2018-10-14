@@ -1,4 +1,4 @@
-.list-section {
+.section {
   overflow: hidden;
 }
 
@@ -10,36 +10,39 @@
   flex-wrap: wrap;
 }
 
-.list-entry {
+.listEntry {
   flex: 1;
   padding: 1rem;
 }
 
-.list-entry--one-third {
+.listEntryOneThird {
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: calc(100% / 3);
 }
 
-.list-entry--one-forth {
+.listEntryOneFourth {
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: 25%;
 }
 
-.list-breaker {
+.listBreaker {
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: 100%;
 }
 
-.button--more {
-  display: block;
-  width: 100%;
-  margin-top: 1rem;
+.button {
   padding: 0.5rem;
   background: var(--color2);
   color: #fff;
   outline-offset: -3px;
   outline-color: var(--color2);
+}
+
+.buttonMore {
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
 }
