@@ -82,9 +82,11 @@ class ListComponent extends Component {
 
   render() {
     const { entries, isFetching, limit } = this.state;
+    const isLarge = window.matchMedia("(min-width: 1280px)").matches;
+    const gridClassName = isLarge ? styles.listEntryOneFourth : styles.listEntryOneThird;
 
     const cards = entries.map((entry, index) =>
-      <li className={ [styles.listEntry, styles.listEntryOneThird].join(' ') } key={ entry.id }>
+      <li className={ [styles.listEntry, gridClassName].join(' ') } key={ entry.id }>
         <CardComponent title={ entry.title } image={ entry.link } index={ index + 1 }/>
       </li>
     );
